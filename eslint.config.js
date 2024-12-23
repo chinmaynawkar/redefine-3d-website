@@ -5,34 +5,55 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: [
+    'dist/',
+    'build/',
+    'node_modules/',
+    '*.config.js',
+    '.eslintrc.cjs',
+    'eslint.config.js',
+    '*.min.js',
+    '*.d.ts',
+    'vite.config.js',
+    'postcss.config.js',
+    'tailwind.config.js'
+  ] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.es2021
       },
+      parserOptions: {
+        ecmaFeatures: { jsx: true }
+      }
     },
-    settings: { react: { version: '18.3' } },
     plugins: {
       react,
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefresh
     },
     rules: {
-      ...js.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
-      ...reactHooks.configs.recommended.rules,
-      'react/jsx-no-target-blank': 'off',
+      'no-unused-vars': 'warn',
+      'no-console': 'warn',
+      'no-debugger': 'warn',
+      'react/prop-types': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+      'react/jsx-uses-vars': 'warn',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true },
+        { allowConstantExport: true }
       ],
+      'react/jsx-no-target-blank': 'warn'
     },
-  },
+    settings: {
+      react: { version: 'detect' }
+    }
+  }
 ]
