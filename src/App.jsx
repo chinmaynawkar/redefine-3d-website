@@ -1,9 +1,11 @@
-
+import HeroSection from './components/HeroSection'
 
 export const App = () => {
   return (
-    <main className="bg-white">
-      <h1 className="text-5xl font-zentry">REDEFINE</h1>
+    <main className='relative min-h-screen w-screen overflow-x-hidden'>
+      <HeroSection />
+
+      <section className='z-0 min-h-screen bg-orange-500' />
     </main>
   )
 }
